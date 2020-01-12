@@ -17,7 +17,7 @@ class CreateNotesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->default('')->nullable();
             $table->string('link')->default('')->nullable();
-            $table->text('notatka')->default('')->nullable();;
+            $table->text('notatka')->nullable();;
             $table->integer('category_id')->default(1)->nullable();
             $table->timestamps();
         });
