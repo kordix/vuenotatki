@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row" v-for="note in notesdata">
         <div class="col-md-8">
-            <a :href="'http://'+note.link" target="_blank">{{note.link}}</a>
+            <a :href="''+note.link" target="_blank">{{note.link}}</a>
         </div>
           <div class="col-md-2">
            <button class="btn-sm btn-danger" @click="remove(note.id)">Usuń</button>

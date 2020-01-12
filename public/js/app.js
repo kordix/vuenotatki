@@ -37396,11 +37396,9 @@ var render = function() {
       _vm._l(_vm.notesdata, function(note) {
         return _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-8" }, [
-            _c(
-              "a",
-              { attrs: { href: "http://" + note.link, target: "_blank" } },
-              [_vm._v(_vm._s(note.link))]
-            )
+            _c("a", { attrs: { href: "" + note.link, target: "_blank" } }, [
+              _vm._v(_vm._s(note.link))
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-2" }, [
