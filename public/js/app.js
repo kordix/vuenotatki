@@ -1999,14 +1999,20 @@ __webpack_require__.r(__webpack_exports__);
       this.editid = id;
       var self = this;
       axios.get('/note/' + id).then(function (res) {
-        return self.link = res.data.link;
+        return self.handleedit(res);
       });
+    },
+    handleedit: function handleedit(res) {
+      this.link = res.data.link;
+      this.notatka = res.data.notatka;
     },
     update: function update() {
       var self = this;
       axios.patch('/note/' + self.editid, {
         link: self.link,
         notatka: self.notatka
+      }).then(function (res) {
+        return self.getData();
       });
     },
     remove: function remove(id) {

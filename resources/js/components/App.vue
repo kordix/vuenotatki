@@ -60,11 +60,17 @@ export default {
             this.mode='edit';
             this.editid = id;
             let self = this;
-            axios.get('/note/'+id).then((res)=>self.link=res.data.link);
+            axios.get('/note/'+id).then((res)=>self.handleedit(res));
+        },
+        handleedit(res){
+            this.link = res.data.link;
+            this.notatka = res.data.notatka;
+
+
         },
         update(){
             let self = this;
-            axios.patch('/note/'+self.editid, {link:self.link,notatka:self.notatka})
+            axios.patch('/note/'+self.editid, {link:self.link,notatka:self.notatka}).then((res)=>self.getData());
         },
         remove(id){
             let self = this;
