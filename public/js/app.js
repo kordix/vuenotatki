@@ -2103,6 +2103,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2120,17 +2122,39 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getData();
   },
+  computed: {},
   methods: {
     getData: function getData() {
       var self = this;
       this.newnote = '';
-      axios.get('picture').then(function (res) {
+      axios.get('/picture').then(function (res) {
         return self.data = res.data;
+      }).then(function () {
+        return self.filter();
       });
+    },
+    filter: function filter() {
+      if (this.$route.path == '/asdf') {
+        this.data = this.data.filter(function (el) {
+          return el.category == 'asdf';
+        });
+      } else {
+        this.data = this.data.filter(function (el) {
+          return el.category != 'asdf';
+        });
+      }
     },
     add: function add() {
       var self = this;
-      axios.post('picture', this.cruddata).then(function (res) {
+
+      if (this.$route.path == '/asdf') {
+        this.cruddata.category = 'asdf';
+      } else {
+        this.cruddata.category = '';
+      }
+
+      console.log(this.cruddata.category);
+      axios.post('/picture', this.cruddata).then(function (res) {
         return self.getData();
       });
     },
@@ -37755,9 +37779,22 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.data, function(elem) {
         return _c("div", { staticClass: "row" }, [
-          _c("img", { attrs: { src: elem.source } })
+          _c("a", { attrs: { href: elem.source, target: "_blank" } }, [
+            _c("img", {
+              staticStyle: { "max-width": "300px", "max-height": "300px" },
+              attrs: { src: elem.source }
+            })
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(elem.category))])
         ])
       }),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.$route.path))]),
+      _vm._v(" "),
+      _vm.$route.path == "/obrazki"
+        ? _c("div", [_vm._v("fasdfadfsdfsf")])
+        : _vm._e(),
       _vm._v(" "),
       _c("br"),
       _c("br"),
@@ -53425,11 +53462,22 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
-  routes: [{
-    path: '/linki',
-    component: _components_Linki_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }, {
+  base: 'obrazki',
+  routes: [// {
+  //     path:'/linki',
+  //     component: linki
+  // },
+  {
     path: '/obrazki',
+    component: _components_Obrazki_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }, {
+    path: '/',
+    component: _components_Obrazki_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }, {
+    path: '',
+    component: _components_Obrazki_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }, {
+    path: '/asdf',
     component: _components_Obrazki_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   } // {
   //     path:'/all',

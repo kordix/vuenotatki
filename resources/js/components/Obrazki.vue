@@ -5,10 +5,12 @@
     </div>
 
     <div class="row" v-for="elem in data">
-        <img :src="elem.source">
+        <a :href="elem.source" target="_blank"><img style="max-width:300px;max-height:300px" :src="elem.source"></a> 
+        <p>{{elem.category}}</p>
     </div>
-
-<br><br>
+    <p>{{$route.path}}</p>
+    <div v-if="$route.path == '/obrazki'">fasdfadfsdfsf</div>
+    <br><br>
     <label for="">Link</label>
     <input type="text" v-model="cruddata.source">
     <button @click="add" v-if="mode=='add'">Dodaj</button>
@@ -34,15 +36,32 @@ export default {
     created(){
       this.getData();
     },
+    computed:{
+  
+    },
     methods:{
         getData(){
             let self = this;
             this.newnote='';
-            axios.get('picture').then((res)=>self.data=res.data);
+            axios.get('/picture').then((res)=>self.data=res.data).then(()=>self.filter());
+        },
+        filter(){
+            if(this.$route.path == '/asdf'){
+                this.data =  this.data.filter((el)=>el.category == 'asdf')
+            }else{
+                this.data =  this.data.filter((el)=>el.category != 'asdf')
+
+            }
         },
         add(){
             let self = this;
-            axios.post('picture',this.cruddata).then((res)=>self.getData());
+            if(this.$route.path == '/asdf'){
+                this.cruddata.category = 'asdf'
+            }else{
+                this.cruddata.category = ''
+            }
+            console.log(this.cruddata.category);
+            axios.post('/picture',this.cruddata).then((res)=>self.getData());
         },
         edit(id){
             this.mode='edit';

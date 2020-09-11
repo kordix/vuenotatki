@@ -26,6 +26,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-Route::get('/{any}', function () {
-    return view('site');
-})->where('any', '.*');
+// Route::get('/{any}', function () {
+//     return view('site');
+// })->where('any', '.*');
+
+
+Route::view('obrazki','site');
+
+Route::get('/obrazki/{any}', function (){
+    return view('site');})->where('any', '.*');

@@ -14,15 +14,28 @@ import obrazki from './components/Obrazki.vue'
 Vue.use(VueRouter)
 export default new VueRouter({
     mode:'history',
+    base:'obrazki',
     routes:[
-        {
-            path:'/linki',
-            component: linki
-        },
+        // {
+        //     path:'/linki',
+        //     component: linki
+        // },
         {
             path:'/obrazki',
             component: obrazki
         },
+        {
+            path:'/',
+            component: obrazki
+        },
+        {
+            path:'',
+            component: obrazki
+        },
+        {
+            path:'/asdf',
+            component: obrazki
+        }
         // {
         //     path:'/all',
         //     component: linki
